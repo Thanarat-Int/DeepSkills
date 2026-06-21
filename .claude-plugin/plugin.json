@@ -1,9 +1,24 @@
 {
-  "name": "9arm-skills",
+  "name": "thanarat-int-skills",
   "skills": [
-    "./skills/engineering/debug-mantra",
-    "./skills/engineering/post-mortem",
+    "./skills/engineering/spec",
+    "./skills/engineering/architect",
+    "./skills/engineering/build",
     "./skills/engineering/scrutinize",
+    "./skills/engineering/ship",
+    "./skills/engineering/operate",
+    "./skills/engineering/handoff",
+    "./skills/ai/data-engineering",
+    "./skills/ai/ml-modeling",
+    "./skills/ai/mlops",
+    "./skills/ai/llm-engineering",
+    "./skills/game/game-design",
+    "./skills/game/game-narrative",
+    "./skills/game/game-dev",
+    "./skills/product/product",
+    "./skills/business/growth",
+    "./skills/business/monetize",
+    "./skills/business/legal-compliance",
     "./skills/productivity/management-talk"
   ]
 }

@@ -1,6 +1,6 @@
-# 9arm-skills
+# Thanarat-Int Skills
 
-Agent skills loaded by Claude Code.
+Agent skills loaded by Claude Code — a reusable end-to-end toolkit for taking a project from idea to production with a single AI driver.
 
 ## Layout
 
@@ -8,20 +8,18 @@ Skills live under `skills/`, grouped into buckets:
 
 - `engineering/` — daily code work
 - `productivity/` — daily non-code workflow tools
-- `misc/` — kept around but rarely used
-- `personal/` — tied to my own setup, not promoted
-- `in-progress/` — drafts not yet ready to ship
-- `deprecated/` — no longer used
 
 Each skill is its own directory containing a `SKILL.md` (with YAML frontmatter — `name` and `description`) and any bundled scripts or reference files.
 
 ## Install
 
-For my own dev loop — symlink every shippable skill into `~/.claude/skills/`:
+Link every skill into `~/.claude/skills/` so they default into every project:
 
 ```bash
 ./scripts/link-skills.sh
 ```
+
+> On Windows without Developer Mode, create directory **junctions** instead (`New-Item -ItemType Junction`), since symlinks need elevation.
 
 List every `SKILL.md` in the repo:
 
@@ -29,18 +27,62 @@ List every `SKILL.md` in the repo:
 ./scripts/list-skills.sh
 ```
 
-## Reference
+## Reuse — deploy the team into a project
 
-### Engineering
+The global install already makes the whole team available in **every** project automatically — nothing to copy. Use these only when you want the team committed **into** a specific project (to share it, move to another machine, or version-lock the team with that repo). They copy every shippable skill as real files into `<project>/.claude/skills/`:
 
-- **[debug-mantra](./skills/engineering/debug-mantra/SKILL.md)** — Four-mantra debugging discipline: reproduce → trace the fail path → falsify the hypothesis → cross-reference every breadcrumb. Recites verbatim at session start, then applies in order before any fix.
-- **[post-mortem](./skills/engineering/post-mortem/SKILL.md)** — Write the canonical engineering record of a fixed bug — root cause, mechanism, fix, validation, how it slipped through. Engineer-audience; refuses to draft without a reliable repro, known cause, and validated fix.
-- **[scrutinize](./skills/engineering/scrutinize/SKILL.md)** — Outsider-perspective end-to-end review of a plan, PR, or code change. Questions intent (is there a simpler way?), traces the actual code path, and verifies the change does what it claims. Output is concise, actionable, with rationale.
+```powershell
+# Windows
+.\scripts\deploy-team.ps1 -TargetProject 'E:\Projects\my-new-project'
+```
+
+```bash
+# macOS / Linux / Git Bash
+./scripts/deploy-team.sh /path/to/my-new-project
+```
+
+As well as copying the skills, `deploy-team` writes a **team working-agreement block** into the project's `CLAUDE.md` (from `templates/CLAUDE-team-snippet.md`), so the AI follows the lifecycle proactively — no slash commands, no prompting needed. The block is fenced by `<!-- team-skills:start/end -->` markers, so re-running updates it in place without touching the rest of your `CLAUDE.md`. Pass `-SkipDirective` (PowerShell) or `--no-directive` (bash) to skip that.
+
+Re-run any time to update a project's copy after the team changes.
+
+> **Slash commands are optional.** Skills auto-trigger from their `description`; typing `/spec-it` only *forces* a specific one. The `CLAUDE.md` directive is what makes the team run end-to-end on its own.
+
+## Reference — the Elite AI Team (12)
+
+A lean team of senior/principal-level skills, each owning one broad discipline so the AI always knows which to use.
+
+### Engineering — idea → running in production
+
+- **[spec](./skills/engineering/spec/SKILL.md)** — Decide what to build and in what order, then lock it into a buildable spec with testable acceptance criteria (prioritization + requirements).
+- **[architect](./skills/engineering/architect/SKILL.md)** — Design system structure, data model, and security together, recorded as a lightweight ADR.
+- **[build](./skills/engineering/build/SKILL.md)** — Build it right: scaffold a new repo, implement in test-first verified increments, choose test levels, refactor safely; never "done" without running it.
+- **[scrutinize](./skills/engineering/scrutinize/SKILL.md)** — Outsider-perspective end-to-end review of a plan, PR, or code change; traces the real code path and verifies it does what it claims.
+- **[ship](./skills/engineering/ship/SKILL.md)** — Get to production and keep it healthy: deploy/infra/observability, the readiness gate with an independent audit, deliberate rollout, and release notes.
+- **[operate](./skills/engineering/operate/SKILL.md)** — Keep running software healthy: diagnose bugs systematically, hunt performance bottlenecks by measurement, and write the post-mortem.
+- **[handoff](./skills/engineering/handoff/SKILL.md)** — Keep project state in durable files so a fresh chat can resume: checkpoint during work, resume ritual on a new session.
+### AI / ML Lab _(specialists, standby — split by discipline, handle any model/task)_
+
+- **[data-engineering](./skills/ai/data-engineering/SKILL.md)** — Build the data foundation: collect, clean, label, transform, version, and split without leakage.
+- **[ml-modeling](./skills/ai/ml-modeling/SKILL.md)** — Train/fine-tune/evaluate models for any task (CV/NLP/tabular…): baseline first, transfer learning, honest evaluation.
+- **[mlops](./skills/ai/mlops/SKILL.md)** — Serve, version (model+data+code), monitor drift, automate retraining and rollback.
+- **[llm-engineering](./skills/ai/llm-engineering/SKILL.md)** — Build on LLMs: prompt → RAG → fine-tune, tool-use/agents, rigorous evals and guardrails.
+
+### Game Studio _(specialists, standby — fire only on game work)_
+
+- **[game-design](./skills/game/game-design/SKILL.md)** — Design the fun: pillars, core loop, interacting systems, progression, economy, levels, and balance — any genre.
+- **[game-narrative](./skills/game/game-narrative/SKILL.md)** — Craft story and world that serve play: premise/theme, worldbuilding, characters, dialogue, quests, meaningful branching.
+- **[game-dev](./skills/game/game-dev/SKILL.md)** — Engineer it for real-time: game loop/timestep, state/ECS, scenes, asset pipeline, frame budget, multiplayer netcode/anti-cheat.
+
+### Product & Design
+
+- **[product](./skills/product/product/SKILL.md)** — Build the right thing for users: validate the problem, design the experience and every state, measure with honest experiments, and turn support signals into improvements.
+
+### Business & Go-to-Market
+
+- **[growth](./skills/business/growth/SKILL.md)** — Pick the 1–2 channels that fit, design the acquisition funnel, plan the launch, and write the words (landing pages, copy, CTAs) that make people act.
+- **[monetize](./skills/business/monetize/SKILL.md)** — Price on value, package into tiers, and keep unit economics healthy by controlling the cost to serve.
+- **[legal-compliance](./skills/business/legal-compliance/SKILL.md)** — Cover the legal basics (privacy/terms, data protection, licensing) and flag what needs a real lawyer. Practical risk-reduction, not legal advice.
 
 ### Productivity
 
 - **[management-talk](./skills/productivity/management-talk/SKILL.md)** — Rewrite engineer-to-engineer content for engineering-org leadership and shape it for the channel it's going to (JIRA, Slack, async standup, email, meeting talking-points).
-
-### Misc
-
-_(none yet)_

@@ -2,16 +2,44 @@
 
 Agent skills loaded by Claude Code — a reusable end-to-end toolkit for taking a project from idea to production with a single AI driver.
 
+## Install as a plugin (recommended — any machine, any OS)
+
+This repo is a Claude Code **plugin marketplace**. On any machine (Windows / macOS / Linux) install the whole team with two commands inside Claude Code:
+
+```
+/plugin marketplace add Thanarat-Int/DeepSkills
+/plugin install thanarat-int-skills@deepskills
+```
+
+Update any time with `/plugin update`. (Private repo? Sign in to GitHub on that machine first, e.g. `gh auth login`.) This is the portable replacement for the manual symlink/junction install further down — same commands on every machine, no broken paths.
+
+### Bundled slash commands
+
+- `/team` — show the full team: every skill, its role, and when to use it
+- `/kickoff <idea>` — start a new project and run it through spec → architect → build
+
+> Slash commands are optional everywhere — skills auto-trigger from their `description`, so just describe your task and the right teammate joins in.
+
+## Dashboard
+
+`dashboard/index.html` is a self-contained, **offline** visualization of the team — a quantum energy-field command center. Click any agent for its role and how to call it, filter by division, zoom/pan, and download the real `SKILL.md` files (per-division or all, as a `.zip`, behind a confirm dialog). Just open the file in any browser.
+
 ## Layout
 
 Skills live under `skills/`, grouped into buckets:
 
-- `engineering/` — daily code work
-- `productivity/` — daily non-code workflow tools
+- `engineering/` — idea → running in production
+- `ai/` — AI / ML lab (data, modeling, MLOps, LLM)
+- `game/` — game studio (design, narrative, dev)
+- `product/` — discover, design, and measure the right product
+- `business/` — go-to-market and economics (growth, monetize, legal)
+- `productivity/` — cross-cutting comms
 
 Each skill is its own directory containing a `SKILL.md` (with YAML frontmatter — `name` and `description`) and any bundled scripts or reference files.
 
-## Install
+## Install (manual / symlink alternative)
+
+> Prefer the **plugin install** above for multiple machines. Use this only for a single-machine local link.
 
 Link every skill into `~/.claude/skills/` so they default into every project:
 

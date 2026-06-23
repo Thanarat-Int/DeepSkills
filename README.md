@@ -11,7 +11,9 @@ This repo is a Claude Code **plugin marketplace**. On any machine (Windows / mac
 /plugin install thanarat-int-skills@deepskills
 ```
 
-Update any time with `/plugin update`. (Private repo? Sign in to GitHub on that machine first, e.g. `gh auth login`.) This is the portable replacement for the manual symlink/junction install further down — same commands on every machine, no broken paths.
+Update any time with `/plugin update`. (Private repo? Sign in to GitHub on that machine first, e.g. `gh auth login`.)
+
+> **Needs a Claude Code build with plugin support** (e.g. the CLI). If you see `/plugin isn't available in this environment` (some IDE extensions), use the **clone + link** method below instead — same result.
 
 ### Bundled slash commands
 
@@ -37,17 +39,28 @@ Skills live under `skills/`, grouped into buckets:
 
 Each skill is its own directory containing a `SKILL.md` (with YAML frontmatter — `name` and `description`) and any bundled scripts or reference files.
 
-## Install (manual / symlink alternative)
+## Install via clone + link (works everywhere, incl. IDE extensions without `/plugin`)
 
-> Prefer the **plugin install** above for multiple machines. Use this only for a single-machine local link.
+Clone the repo once per machine, then link every skill into `~/.claude/skills/` so they default into every project. Re-run after pulling updates.
 
-Link every skill into `~/.claude/skills/` so they default into every project:
+```bash
+git clone https://github.com/Thanarat-Int/DeepSkills.git
+cd DeepSkills
+```
+
+**macOS / Linux / Git Bash** (symlinks):
 
 ```bash
 ./scripts/link-skills.sh
 ```
 
-> On Windows without Developer Mode, create directory **junctions** instead (`New-Item -ItemType Junction`), since symlinks need elevation.
+**Windows** (junctions — no admin / Developer Mode needed):
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/link-skills.ps1
+```
+
+To update later: `git pull` then re-run the same link script.
 
 List every `SKILL.md` in the repo:
 

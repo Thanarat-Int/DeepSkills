@@ -1,0 +1,19 @@
+{
+  "name": "deepskills",
+  "owner": {
+    "name": "Thanarat-Int",
+    "email": "siriprogrammer@gmail.com"
+  },
+  "metadata": {
+    "description": "DeepSkills — an elite all-AI engineering team as Claude Code skills.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "thanarat-int-skills",
+      "source": "./",
+      "description": "12 senior/principal-level skills across engineering, AI/ML, game, product, business, and productivity — spec, architect, build, scrutinize, ship, operate, handoff, data-engineering, ml-modeling, mlops, llm-engineering, game-design, game-narrative, game-dev, product, growth, monetize, legal-compliance, management-talk.",
+      "version": "1.0.0"
+    }
+  ]
+}
